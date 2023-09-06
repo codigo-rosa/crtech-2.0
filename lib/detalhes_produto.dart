@@ -1,8 +1,6 @@
 import 'package:crtech/produtos/produtos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:crtech/produtos/produtos.dart';
-import 'package:crtech/produtos/meus_produtos.dart';
 
 class DetalhesProdutoMaior extends StatefulWidget {
   final Produtos produto;

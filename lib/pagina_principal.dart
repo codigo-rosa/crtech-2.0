@@ -1,5 +1,6 @@
 import 'package:crtech/detalhes_produto.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:crtech/appBar.dart';
 import 'package:crtech/barra_inferior.dart';
@@ -7,6 +8,7 @@ import 'package:crtech/produtos/meus_produtos.dart';
 import 'package:crtech/produtos/produtos.dart';
 import 'package:crtech/tela/carrrossel.dart';
 import 'package:crtech/tela/tela_carrinho.dart';
+import 'package:flutter/material.dart';
 
 class PaginaPrincipal extends StatefulWidget {
   final List<Produtos> carrinho;
@@ -27,32 +29,56 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        onCartPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => TelaCarrinho(carrinho: carrinho),
-            ),
-          );
-        },
-        onSearchChanged: (text) {
-          setState(() {
-            searchText = text;
-          });
-        },
-      ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 20.0),
-        child: Column(
+      appBar: AppBar(
+        toolbarHeight: 100,
+        backgroundColor: Colors.white,
+        flexibleSpace: Column(
           children: [
-            Carrossel(), // Adicione o carrossel aqui
-            construirCategoriasDeProdutos(),
-            Expanded(
-              child: construirProdutosExibidos(),
+            Image.asset(
+              'assets/logo/logo.jpg', // Caminho da imagem
+              width: 90.0,
+              height: 90.0,
             ),
           ],
         ),
+      ),
+      body: Column(
+        children: [
+          // Carrossel
+          Carrossel(),
+
+          // AppBar
+          CustomAppBar(
+            onCartPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TelaCarrinho(carrinho: carrinho),
+                ),
+              );
+            },
+            onSearchChanged: (text) {
+              setState(() {
+                searchText = text;
+              });
+            },
+          ),
+
+          // Conteúdo principal
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 20.0),
+              child: Column(
+                children: [
+                  construirCategoriasDeProdutos(),
+                  Expanded(
+                    child: construirProdutosExibidos(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: CustomBottomAppBar(
         onTabSelected: (index) {
@@ -73,6 +99,38 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Ícone de coração para favoritar
+              IconButton(
+                iconSize: 18.5, // Tamanho do ícone
+                icon: Icon(
+                  favoritos[index] ? Icons.favorite : Icons.favorite_border,
+                  color: Color.fromARGB(255, 231, 130, 164),
+                ),
+                onPressed: () {
+                  setState(() {
+                    favoritos[index] = !favoritos[index];
+                  });
+                },
+              ),
+              // Ícone de carrinho para adicionar ao carrinho
+              IconButton(
+                iconSize: 18.5, // Tamanho do ícone
+                icon: Icon(
+                  Icons.add_shopping_cart_sharp,
+                  color: Colors.black, // Cor do ícone de carrinho
+                ),
+                onPressed: () {
+                  setState(() {
+                    carrinho.add(produtos);
+                  });
+                  mostrarModalConfirmacao(context);
+                },
+              ),
+            ],
+          ),
           Expanded(
             child: GestureDetector(
               onTap: () {
@@ -93,8 +151,9 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
           ),
           Text(
             produtos.descricao,
-            style: const TextStyle(
-              fontFamily: 'Roboto',
+            style: TextStyle(
+              fontFamily: GoogleFonts.lato()
+                  .fontFamily, // Use a fonte Lato do Google Fonts
               fontSize: 13,
             ),
             textAlign: TextAlign.center,
@@ -111,40 +170,6 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                carrinho.add(produtos);
-              });
-              mostrarModalConfirmacao(context);
-            },
-            style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 240, 238, 239),
-              onPrimary: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
-            child: const Text(
-              'Adicionar ao Carrinho',
-              style: TextStyle(
-                fontSize: 12.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          // Ícone de coração para favoritar
-          IconButton(
-            icon: Icon(
-              favoritos[index] ? Icons.favorite : Icons.favorite_border,
-              color: Colors.red, // Cor do ícone de coração
-            ),
-            onPressed: () {
-              setState(() {
-                favoritos[index] = !favoritos[index];
-              });
-            },
-          ),
         ],
       ),
     );
@@ -203,13 +228,17 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: isSelected == index
+              ? Colors.pink
+              : Colors.white, // Use Colors.pink quando selecionado
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(
           nome,
           style: TextStyle(
-            color: isSelected == index ? Colors.white : Colors.pink,
+            color: isSelected == index
+                ? Colors.white
+                : Color.fromARGB(255, 25, 26, 25),
             fontSize: 16.0,
             fontWeight: FontWeight.bold,
           ),
