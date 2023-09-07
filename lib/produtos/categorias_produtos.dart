@@ -2,6 +2,7 @@ import 'package:crtech/produtos/meus_produtos.dart';
 import 'package:crtech/produtos/produto_card.dart';
 import 'package:flutter/material.dart';
 
+
 class TelaHome extends StatefulWidget {
   const TelaHome({super.key});
 
@@ -9,8 +10,10 @@ class TelaHome extends StatefulWidget {
   State<TelaHome> createState() => EstadoTelaHome();
 }
 
+
 class EstadoTelaHome extends State<TelaHome> {
   int isSelected = 0; // Esta variável controla a categoria selecionada
+  int produtoIdSelecionado = -1; //esta variavel controla od id do produto q foi selecionado, inicializa com -1 para indicar nenhum produto selecionado
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -125,4 +128,34 @@ class EstadoTelaHome extends State<TelaHome> {
           return ProdutoCard(produtos: listaDeRede);
         },
       );
+
+  //     List<Produtos> getProdutosPorIndice(int indice) {
+  // switch (indice) {
+  //   case 1:
+  //     return MeusProdutos.listaGamer;
+  //   case 2:
+  //     return MeusProdutos.listaDeRede;
+  //   case 3:
+  //     return MeusProdutos.listaDeHardware;
+  //   default:
+  //     return []; // Retorne uma lista vazia para um índice inválido
+  // }
+
+  // Método para obter a lista de produtos com base no índice do produto clicado
+//   List<Produtos> getProdutosDaCategoriaDoProdutoClicado(int produtoIndex) {
+//     if (produtoIndex < 0) {
+//       return []; // Retorna uma lista vazia se o índice for inválido
+//     }
+
+//     // Verifica a categoria do produto com base no índice
+//     if (produtoIndex < MeusProdutos.listaGamer.length) {
+//       return MeusProdutos.listaGamer; // Categoria "Gamer"
+//     } else if (produtoIndex < MeusProdutos.listaGamer.length +
+//         MeusProdutos.listaDeRede.length) {
+//       return MeusProdutos.listaDeRede; // Categoria "Rede"
+//     } else {
+//       return MeusProdutos.listaDeHardware; // Categoria "Hardware"
+//     }
+
+// }
 }

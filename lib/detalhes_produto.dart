@@ -1,3 +1,4 @@
+import 'package:crtech/produtos/categorias_produtos.dart';
 import 'package:crtech/produtos/produtos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -44,8 +45,13 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
 
   @override
   Widget build(BuildContext context) {
+    // Acesse o ID do produto selecionado diretamente da classe EstadoTelaHome
+    // final int idDoProdutoSelecionado = ModalRoute.of(context)?.settings.arguments as int ?? -1;
+
+    // Agora você pode usar 'idDoProdutoSelecionado' conforme necessário nesta tela
+
     return Scaffold(
-      backgroundColor: Color.fromARGB(104, 231, 231, 231),
+      backgroundColor: const Color.fromARGB(242, 242, 241, 241),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -53,7 +59,7 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.black,
           ),
@@ -66,37 +72,22 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.0),
-                    spreadRadius: 3,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
-                  ),
-                ],
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Image.asset(
                   widget.produto.imagem,
-                  width: MediaQuery.of(context).size.width -32, // Defina o tamanho desejado
+                  width: MediaQuery.of(context).size.width -
+                      32, // Defina o tamanho desejado
                   height: 150,
                 ),
               ),
             ),
-             const SizedBox(height: 35.0),
+            const SizedBox(height: 35.0),
             Container(
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.0),
-                    spreadRadius: 3,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
-                  ),
-                ],
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -104,10 +95,11 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Nome: ${widget.produto.nome}'),
-                    Text('Preço: R\$ ${widget.produto.preco.toStringAsFixed(2)}'),
+                    Text(
+                        'Preço: R\$ ${widget.produto.preco.toStringAsFixed(2)}'),
                     Text('Descrição: ${widget.produto.descricao}'),
-                  SizedBox(height: 7.0),
-                    // Ícone de estrela para avaliação
+                    const SizedBox(height: 7.0),
+                    // Ícone de estrela com estatísticas das avaliações
                     RatingBar.builder(
                       initialRating: 0,
                       minRating: 1,
@@ -115,8 +107,8 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                       allowHalfRating: true,
                       itemCount: 5,
                       itemSize: 15.0,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) => Icon(
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Colors.amber,
                       ),
@@ -124,55 +116,15 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                         setState(() {
                           _rating = rating;
                         });
-          },
-        ),
-      ],
-    ),
-  ),
-),
-            // Container(
-            //   width: MediaQuery.of(context).size.width,
-            //   decoration: BoxDecoration(
-            //     color: Colors.white,
-            //     boxShadow: [
-            //       BoxShadow(
-            //         color: Colors.grey.withOpacity(0.0),
-            //         spreadRadius: 3,
-            //         blurRadius: 5,
-            //         offset: Offset(0, 2),
-            //       ),
-            //     ],
-            //   ),
-             
-            // ),
-
-
-
-
-             // Espaço para comentário
-                    _comentarioEnviado
-                        ? SizedBox
-                            .shrink() // Oculta o espaço do comentário após o envio
-                        : Column(
-                            children: [
-                              TextField(
-                                controller: _commentController,
-                                decoration: InputDecoration(
-                                  labelText: 'Comentário',
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  _enviarComentario(); // Chama o método para enviar o comentário
-                                },
-                                child: Text('Enviar Comentário'),
-                              ),
-                            ],
-                          ),
-
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
 
             // Espaço para sugestões de produtos
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Text(
               'Sugestões de Produtos',
               style: TextStyle(fontSize: 18),
@@ -201,10 +153,59 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                 );
               }).toList(),
             ),
+
+            SizedBox(height: 7.0),
+            // Espaço para comentário
+            Container(
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              child: _comentarioEnviado
+                  ? const SizedBox
+                      .shrink() // Oculta o espaço do comentário após o envio
+                  : Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: const Text(
+                              'Avalie este produto',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'roboto',
+                              ),
+                            ),
+                          ),
+                          const Text(
+                            'Compartilhe seus pensamentos com outros clientes',
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          TextField(
+                            controller: _commentController,
+                            decoration: InputDecoration(
+                              labelText: 'Comentário',
+                              border: InputBorder.none,
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              _enviarComentario(); // Chama o método para enviar o comentário
+                            },
+                            child: Text('Enviar Comentário'),
+                          ),
+                        ],
+                      ),
+                    ),
+            ),
           ],
         ),
       ),
-    
     );
 
     @override
