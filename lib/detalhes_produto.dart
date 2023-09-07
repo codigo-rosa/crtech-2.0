@@ -7,11 +7,11 @@ import 'package:crtech/produtos/meus_produtos.dart';
 
 class DetalhesProdutoMaior extends StatefulWidget {
   final Produtos produto;
-  final List<Produtos> todosProdutos;
+  // final List<Produtos> todosProdutos;
 
   DetalhesProdutoMaior({
     required this.produto,
-    required this.todosProdutos,
+    // required this.todosProdutos,
   });
 
   @override
@@ -29,8 +29,9 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
     super.initState();
 
     // Encontre produtos relacionados com base no ID do produto atual
-    produtosSugeridos = widget.todosProdutos
-        .where((produto) => produto.id != widget.produto.id)
+    produtosSugeridos = MeusProdutos.todosProdutos
+        .where((produto) => produto.categoria == widget.produto.categoria &&
+        produto != widget.produto)
         .toList();
   }
 
@@ -45,11 +46,6 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
 
   @override
   Widget build(BuildContext context) {
-    // Acesse o ID do produto selecionado diretamente da classe EstadoTelaHome
-    // final int idDoProdutoSelecionado = ModalRoute.of(context)?.settings.arguments as int ?? -1;
-
-    // Agora você pode usar 'idDoProdutoSelecionado' conforme necessário nesta tela
-
     return Scaffold(
       backgroundColor: const Color.fromARGB(242, 242, 241, 241),
       appBar: AppBar(
@@ -130,83 +126,102 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
               style: TextStyle(fontSize: 18),
             ),
             // Lista de produtos sugeridos
-            Column(
-              children: produtosSugeridos.map((produto) {
-                return ListTile(
-                  leading: Image.asset(
-                    produto.imagem,
-                    width: 50,
-                    height: 50,
-                  ),
-                  title: Text(produto.nome),
+            Container(
+              height: 100,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: produtosSugeridos.length,
+              itemBuilder: (context, index) {
+                final produtoSugerido = produtosSugeridos[index];
+                return GestureDetector(
                   onTap: () {
                     // Navegue para a página de detalhes deste produto
-                    Navigator.of(context).push(
+                    Navigator.push(
+                      context,
                       MaterialPageRoute(
                         builder: (context) => DetalhesProdutoMaior(
-                          produto: produto,
-                          todosProdutos: widget.todosProdutos,
-                        ),
+                          produto: produtoSugerido,
+                         ),
                       ),
                     );
                   },
-                );
-              }).toList(),
-            ),
-
-            SizedBox(height: 7.0),
-            // Espaço para comentário
-            Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-              child: _comentarioEnviado
-                  ? const SizedBox
-                      .shrink() // Oculta o espaço do comentário após o envio
-                  : Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: const Text(
-                              'Avalie este produto',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'roboto',
-                              ),
-                            ),
-                          ),
-                          const Text(
-                            'Compartilhe seus pensamentos com outros clientes',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          TextField(
-                            controller: _commentController,
-                            decoration: InputDecoration(
-                              labelText: 'Comentário',
-                              border: InputBorder.none,
-                            ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              _enviarComentario(); // Chama o método para enviar o comentário
-                            },
-                            child: Text('Enviar Comentário'),
-                          ),
-                        ],
-                      ),
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          produtoSugerido.imagem,
+                          width: 50,
+                          height: 50,
+                        ),
+                        Text(produtoSugerido.nome),
+                     ],
                     ),
+                  ),
+                );
+              },
             ),
-          ],
-        ),
+          ),
+          
+        ],
+      ),
       ),
     );
+  }
+
+            // SizedBox(height: 7.0),
+            // // Espaço para comentário
+            // Container(
+            //   width: MediaQuery.of(context).size.width,
+            //   decoration: BoxDecoration(
+            //     color: Colors.white,
+            //   ),
+            //   child: _comentarioEnviado
+            //       ? const SizedBox
+            //           .shrink() // Oculta o espaço do comentário após o envio
+            //       : Padding(
+            //           padding: const EdgeInsets.all(16.0),
+            //           child: Column(
+            //             crossAxisAlignment: CrossAxisAlignment.start,
+            //             children: [
+            //               Padding(
+            //                 padding: const EdgeInsets.only(bottom: 8.0),
+            //                 child: const Text(
+            //                   'Avalie este produto',
+            //                   style: TextStyle(
+            //                     fontSize: 18,
+            //                     fontWeight: FontWeight.bold,
+            //                     fontFamily: 'roboto',
+            //                   ),
+            //                 ),
+            //               ),
+            //               const Text(
+            //                 'Compartilhe seus pensamentos com outros clientes',
+            //                 style: TextStyle(
+            //                   fontWeight: FontWeight.normal,
+            //                 ),
+            //               ),
+            //               TextField(
+            //                 controller: _commentController,
+            //                 decoration: InputDecoration(
+            //                   labelText: 'Comentário',
+            //                   border: InputBorder.none,
+            //                 ),
+            //               ),
+            //               ElevatedButton(
+            //                 onPressed: () {
+            //                   _enviarComentario(); // Chama o método para enviar o comentário
+            //                 },
+            //                 child: Text('Enviar Comentário'),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            // ),
+    //       ],
+    //     ),
+    //   ),
+    // );
 
     @override
     void dispose() {
@@ -214,4 +229,4 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
       super.dispose();
     }
   }
-}
+
