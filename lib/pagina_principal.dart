@@ -139,7 +139,6 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                   MaterialPageRoute(
                     builder: (context) => DetalhesProdutoMaior(
                       produto: produtos,
-                      todosProdutos: [],
                     ),
                   ),
                 );
@@ -278,7 +277,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
       itemCount: produtosExibidos.length,
       itemBuilder: (context, index) {
         final produtos = produtosExibidos[index];
-        return construirCardDeProdutos(produtos, index, produtos.id);
+        return construirCardDeProdutos(produtos, index, produtos.categoria);
       },
     );
   }

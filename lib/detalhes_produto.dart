@@ -1,14 +1,13 @@
-import 'package:crtech/produtos/produtos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:crtech/produtos/meus_produtos.dart';
+import 'package:crtech/produtos/produtos.dart';
 
 class DetalhesProdutoMaior extends StatefulWidget {
   final Produtos produto;
-  final List<Produtos> todosProdutos;
 
   DetalhesProdutoMaior({
     required this.produto,
-    required this.todosProdutos,
   });
 
   @override
@@ -25,13 +24,14 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
   void initState() {
     super.initState();
 
-    // Encontre produtos relacionados com base no ID do produto atual
-    produtosSugeridos = widget.todosProdutos
-        .where((produto) => produto.id != widget.produto.id)
+    // Encontre produtos sugeridos com base na categoria do produto atual
+    produtosSugeridos = MeusProdutos.todosProdutos
+        .where((produto) =>
+            produto.categoria == widget.produto.categoria &&
+            produto != widget.produto) // Exclui o produto selecionado
         .toList();
   }
 
-  @override
   void _enviarComentario() {
     final comentario = _commentController.text;
     print('Comentário enviado pelo cliente: $comentario');
@@ -48,20 +48,14 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
       ),
       body: ListView(
         children: [
-          // Exiba a imagem em tamanho menor
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Image.asset(
               widget.produto.imagem,
-              width: 150, // Defina o tamanho desejado
+              width: 150,
               height: 150,
             ),
           ),
-          Text('Nome: ${widget.produto.nome}'),
-          Text('Preço: R\$ ${widget.produto.preco.toStringAsFixed(2)}'),
-          Text('Descrição: ${widget.produto.descricao}'),
-
-          // Ícone de estrela para avaliação
           RatingBar.builder(
             initialRating: 0,
             minRating: 1,
@@ -79,10 +73,8 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
               });
             },
           ),
-
-          // Espaço para comentário
           _comentarioEnviado
-              ? SizedBox.shrink() // Oculta o espaço do comentário após o envio
+              ? SizedBox.shrink()
               : Column(
                   children: [
                     TextField(
@@ -93,42 +85,51 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        _enviarComentario(); // Chama o método para enviar o comentário
+                        _enviarComentario();
                       },
                       child: Text('Enviar Comentário'),
                     ),
                   ],
                 ),
-
-          // Espaço para sugestões de produtos
           SizedBox(height: 20.0),
           Text(
             'Sugestões de Produtos',
             style: TextStyle(fontSize: 18),
           ),
-          // Lista de produtos sugeridos
-          Column(
-            children: produtosSugeridos.map((produto) {
-              return ListTile(
-                leading: Image.asset(
-                  produto.imagem,
-                  width: 50,
-                  height: 50,
-                ),
-                title: Text(produto.nome),
-                onTap: () {
-                  // Navegue para a página de detalhes deste produto
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => DetalhesProdutoMaior(
-                        produto: produto,
-                        todosProdutos: widget.todosProdutos,
+          Container(
+            height: 100,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: produtosSugeridos.length,
+              itemBuilder: (context, index) {
+                final produtoSugerido = produtosSugeridos[index];
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetalhesProdutoMaior(
+                          produto: produtoSugerido,
+                        ),
                       ),
+                    );
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          produtoSugerido.imagem,
+                          width: 50,
+                          height: 50,
+                        ),
+                        Text(produtoSugerido.nome),
+                      ],
                     ),
-                  );
-                },
-              );
-            }).toList(),
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
