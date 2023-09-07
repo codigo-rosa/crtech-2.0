@@ -146,7 +146,7 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                     );
                   },
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
                         Image.asset(
@@ -162,11 +162,11 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
               },
             ),
           ),
-               SizedBox(height: 7.0),
+               const SizedBox(height: 7.0),
              // Espaço para comentário
              Container(
                width: MediaQuery.of(context).size.width,
-               decoration: BoxDecoration(
+               decoration: const BoxDecoration(
                  color: Colors.white,
                ),
                child: _comentarioEnviado
@@ -177,9 +177,9 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                        child: Column(
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
-                           Padding(
-                             padding: const EdgeInsets.only(bottom: 8.0),
-                             child: const Text(
+                           const Padding(
+                             padding: EdgeInsets.only(bottom: 2.0),
+                             child: Text(
                                'Avalie este produto',
                                 style: TextStyle(
                                  fontSize: 18,
@@ -188,15 +188,37 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                                ),
                              ),
                            ),
+                           const SizedBox(height: 1.0),
+                    
                            const Text(
                              'Compartilhe seus pensamentos com outros clientes',
                              style: TextStyle(
                                fontWeight: FontWeight.normal,
                              ),
                            ),
+                            const SizedBox(height: 1.0),
+                           // Ícone de estrela com estatísticas das avaliações
+                    RatingBar.builder(
+                      initialRating: 0,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemSize: 25.0,
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        setState(() {
+                          _rating = rating;
+                        });
+                      },
+                    ),
                            TextField(
                              controller: _commentController,
-                             decoration: InputDecoration(
+                             decoration: const InputDecoration(
                                labelText: 'Comentário',
                                border: InputBorder.none,
                              ),
@@ -205,7 +227,7 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                              onPressed: () {
                                _enviarComentario();  //Chama o método para enviar o comentário
                              },
-                             child: Text('Enviar Comentário'),
+                             child: const Text('Enviar Comentário'),
                            ),
                          ],
                        ),
