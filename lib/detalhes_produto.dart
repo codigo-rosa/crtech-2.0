@@ -162,61 +162,65 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
               },
             ),
           ),
-          
-        ],
+               SizedBox(height: 7.0),
+             // Espaço para comentário
+             Container(
+               width: MediaQuery.of(context).size.width,
+               decoration: BoxDecoration(
+                 color: Colors.white,
+               ),
+               child: _comentarioEnviado
+                   ? const SizedBox
+                       .shrink() // Oculta o espaço do comentário após o envio
+                   : Padding(
+                       padding: const EdgeInsets.all(16.0),
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           Padding(
+                             padding: const EdgeInsets.only(bottom: 8.0),
+                             child: const Text(
+                               'Avalie este produto',
+                                style: TextStyle(
+                                 fontSize: 18,
+                                 fontWeight: FontWeight.bold,
+                                 fontFamily: 'roboto',
+                               ),
+                             ),
+                           ),
+                           const Text(
+                             'Compartilhe seus pensamentos com outros clientes',
+                             style: TextStyle(
+                               fontWeight: FontWeight.normal,
+                             ),
+                           ),
+                           TextField(
+                             controller: _commentController,
+                             decoration: InputDecoration(
+                               labelText: 'Comentário',
+                               border: InputBorder.none,
+                             ),
+                           ),
+                           ElevatedButton(
+                             onPressed: () {
+                               _enviarComentario();  //Chama o método para enviar o comentário
+                             },
+                             child: Text('Enviar Comentário'),
+                           ),
+                         ],
+                       ),
+                     ),
+
+
+             ),
+          ],
       ),
-      ),
+    ),
     );
+
   }
 
-            // SizedBox(height: 7.0),
-            // // Espaço para comentário
-            // Container(
-            //   width: MediaQuery.of(context).size.width,
-            //   decoration: BoxDecoration(
-            //     color: Colors.white,
-            //   ),
-            //   child: _comentarioEnviado
-            //       ? const SizedBox
-            //           .shrink() // Oculta o espaço do comentário após o envio
-            //       : Padding(
-            //           padding: const EdgeInsets.all(16.0),
-            //           child: Column(
-            //             crossAxisAlignment: CrossAxisAlignment.start,
-            //             children: [
-            //               Padding(
-            //                 padding: const EdgeInsets.only(bottom: 8.0),
-            //                 child: const Text(
-            //                   'Avalie este produto',
-            //                   style: TextStyle(
-            //                     fontSize: 18,
-            //                     fontWeight: FontWeight.bold,
-            //                     fontFamily: 'roboto',
-            //                   ),
-            //                 ),
-            //               ),
-            //               const Text(
-            //                 'Compartilhe seus pensamentos com outros clientes',
-            //                 style: TextStyle(
-            //                   fontWeight: FontWeight.normal,
-            //                 ),
-            //               ),
-            //               TextField(
-            //                 controller: _commentController,
-            //                 decoration: InputDecoration(
-            //                   labelText: 'Comentário',
-            //                   border: InputBorder.none,
-            //                 ),
-            //               ),
-            //               ElevatedButton(
-            //                 onPressed: () {
-            //                   _enviarComentario(); // Chama o método para enviar o comentário
-            //                 },
-            //                 child: Text('Enviar Comentário'),
-            //               ),
-            //             ],
-            //           ),
-            //         ),
+            
             // ),
     //       ],
     //     ),
