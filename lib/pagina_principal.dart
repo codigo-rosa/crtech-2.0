@@ -1,13 +1,13 @@
-import 'package:crtech/detalhes_produto.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:crtech/appBar.dart';
 import 'package:crtech/barra_inferior.dart';
+import 'package:crtech/detalhes_produto.dart';
 import 'package:crtech/produtos/meus_produtos.dart';
 import 'package:crtech/produtos/produtos.dart';
 import 'package:crtech/tela/carrrossel.dart';
 import 'package:crtech/tela/tela_carrinho.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class PaginaPrincipal extends StatefulWidget {
   final List<Produtos> carrinho;
@@ -88,6 +88,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
         selectedIndex: isSelected,
         favoritos: favoritos,
       ),
+      backgroundColor: Color.fromARGB(239, 238, 237, 237),
     );
   }
 
@@ -184,7 +185,14 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('OK'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.pink, // Define a cor de fundo como rosa
+              ),
+              child: const Text(
+                'OK',
+                style: TextStyle(
+                    color: Colors.white), // Define a cor do texto como branco
+              ),
             ),
           ],
         );
@@ -194,7 +202,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
 
   Widget construirCategoriasDeProdutos() {
     return Container(
-      color: Colors.white,
+      color: Color.fromARGB(239, 238, 237, 237),
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       width: double.infinity,
       child: SingleChildScrollView(
@@ -229,7 +237,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
           color: isSelected == index
               ? Colors.pink
               : Color.fromARGB(
-                  241, 255, 255, 255), // Use Colors.pink quando selecionado
+                  239, 238, 237, 237), // Use Colors.pink quando selecionado
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(

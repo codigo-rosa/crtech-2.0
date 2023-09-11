@@ -17,18 +17,20 @@ class _TelaSelecaoEntregaState extends State<TelaSelecaoEntrega> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Icon(Icons.check_circle,
-              color: Colors.green, size: 48), // Ícone de check
+          title: Icon(Icons.check_circle, color: Colors.green, size: 48),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Parabéns! Seu pagamento foi efetuado com sucesso!',
-                style: TextStyle(fontSize: 18),
+                'Parabéns! Sua seleção de entrega foi concluída!',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               SizedBox(height: 16),
               Text(
-                'Você receberá um email com as informações do pagamento.',
+                'Você receberá informações sobre a entrega em breve.',
                 style: TextStyle(fontSize: 16),
               ),
             ],
@@ -36,10 +38,15 @@ class _TelaSelecaoEntregaState extends State<TelaSelecaoEntrega> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.pop(context); // Fechar o diálogo
+                Navigator.pop(context);
                 _limparCampos();
               },
-              child: Text('OK'),
+              child: Text(
+                'OK',
+                style: TextStyle(
+                  color: Colors.pink, // Cor do texto
+                ),
+              ),
             ),
           ],
         );
@@ -66,130 +73,141 @@ class _TelaSelecaoEntregaState extends State<TelaSelecaoEntrega> {
         backgroundColor: Colors.pink,
         title: Text('Seleção de Entrega'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Informe seus dados pessoais:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 16),
-            TextFormField(
-              controller: _nomeController,
-              decoration: InputDecoration(labelText: 'Nome'),
-            ),
-            TextFormField(
-              controller: _enderecoController,
-              decoration: InputDecoration(labelText: 'Endereço'),
-            ),
-            TextFormField(
-              controller: _telefoneController,
-              decoration: InputDecoration(labelText: 'Telefone'),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Selecione o método de entrega:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                if (_validarCampos()) {
-                  setState(() {
-                    entregaSelecionada = true;
-                    retiradaSelecionada = false;
-                  });
-                  _mostrarMensagemDeSucesso(context);
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text('Campos obrigatórios'),
-                        content: Text('Por favor, preencha todos os campos.'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text('OK'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                primary:
-                    Color.fromARGB(255, 240, 238, 239), // Cor de fundo cinza
-                onPrimary: Colors.black, // Cor do texto preto
+      body: Container(
+        color: Color.fromARGB(255, 240, 238, 239),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Informe seus dados pessoais:',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    entregaSelecionada
-                        ? Icons.check
-                        : Icons.check_box_outline_blank,
-                    color: entregaSelecionada ? Colors.green : null,
-                  ), // Ícone de check
-                  SizedBox(width: 8),
-                  Text('Entrega: Receba no seu endereço'),
-                ],
+              SizedBox(height: 23),
+              TextFormField(
+                controller: _nomeController,
+                decoration: InputDecoration(labelText: 'Nome'),
               ),
-            ),
-            SizedBox(height: 16), // Espaçamento entre os botões
-            ElevatedButton(
-              onPressed: () {
-                if (_validarCampos()) {
-                  setState(() {
-                    entregaSelecionada = false;
-                    retiradaSelecionada = true;
-                  });
-                  _mostrarMensagemDeSucesso(context);
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text('Campos obrigatórios'),
-                        content: Text('Por favor, preencha todos os campos.'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text('OK'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                primary:
-                    Color.fromARGB(255, 240, 238, 239), // Cor de fundo cinza
-                onPrimary: Colors.black, // Cor do texto preto
+              TextFormField(
+                controller: _enderecoController,
+                decoration: InputDecoration(labelText: 'Endereço'),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    retiradaSelecionada
-                        ? Icons.check
-                        : Icons.check_box_outline_blank,
-                    color: retiradaSelecionada ? Colors.green : null,
-                  ), // Ícone de check
-                  SizedBox(width: 8),
-                  Text('Retirada: Retire em uma de nossas lojas'),
-                ],
+              TextFormField(
+                controller: _telefoneController,
+                decoration: InputDecoration(labelText: 'Telefone'),
               ),
-            ),
-          ],
+              SizedBox(height: 30),
+              Text(
+                'Selecione o método de entrega:',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 30),
+              ElevatedButton(
+                onPressed: () {
+                  if (_validarCampos()) {
+                    setState(() {
+                      entregaSelecionada = true;
+                      retiradaSelecionada = false;
+                    });
+                    _mostrarMensagemDeSucesso(context);
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Campos obrigatórios'),
+                          content: Text('Por favor, preencha todos os campos.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'OK',
+                                style: TextStyle(
+                                  color: Colors.pink, // Cor do texto
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  primary:
+                      Color.fromARGB(240, 223, 221, 221), // Cor de fundo cinza
+                  onPrimary: Colors.white, // Cor do texto branco
+                  minimumSize: Size(150, 60), // Tamanho do botão
+                ),
+                child: Text(
+                  'Receba em casa',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18, // Tamanho da fonte
+                    color: Colors.black, // Cor do texto
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  if (_validarCampos()) {
+                    setState(() {
+                      entregaSelecionada = false;
+                      retiradaSelecionada = true;
+                    });
+                    _mostrarMensagemDeSucesso(context);
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Campos obrigatórios'),
+                          content: Text('Por favor, preencha todos os campos.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'OK',
+                                style: TextStyle(
+                                  color: Colors.pink, // Cor do texto
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  primary:
+                      Color.fromARGB(240, 223, 221, 221), // Cor de fundo cinza
+                  onPrimary: Colors.white, // Cor do texto branco
+                  minimumSize: Size(300, 60), // Tamanho do botão
+                ),
+                child: Text(
+                  'Retire em nossas lojas',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18, // Tamanho da fonte
+                    color: Colors.black, // Cor do texto
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
