@@ -62,19 +62,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
           color: Colors.black, // Cor do ícone do carrinho
         ),
       ],
-      // flexibleSpace: Column(
-      //   mainAxisAlignment: MainAxisAlignment.center, // Centralizar os ícones
-      //   children: [
-      //     // Image.asset(
-      //     //   //'assets/cr.jpg', // Substitua 'sua_imagem.png' pelo caminho da sua imagem no projeto
-      //     //   width: 64, // Metade do tamanho original
-      //     //   height: 64, // Metade do tamanho original
-      //     //   fit:
-      //           BoxFit.cover, // Ajusta a imagem para cobrir o espaço disponível
-      //     ),
-      //     SizedBox(height: 8), // Espaço entre a imagem e os ícones
-      //   ],
-      //  ),
     );
   }
 }

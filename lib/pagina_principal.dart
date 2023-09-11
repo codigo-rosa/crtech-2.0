@@ -8,7 +8,6 @@ import 'package:crtech/produtos/meus_produtos.dart';
 import 'package:crtech/produtos/produtos.dart';
 import 'package:crtech/tela/carrrossel.dart';
 import 'package:crtech/tela/tela_carrinho.dart';
-import 'package:flutter/material.dart';
 
 class PaginaPrincipal extends StatefulWidget {
   final List<Produtos> carrinho;
@@ -229,7 +228,8 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
         decoration: BoxDecoration(
           color: isSelected == index
               ? Colors.pink
-              : Colors.white, // Use Colors.pink quando selecionado
+              : Color.fromARGB(
+                  241, 255, 255, 255), // Use Colors.pink quando selecionado
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(

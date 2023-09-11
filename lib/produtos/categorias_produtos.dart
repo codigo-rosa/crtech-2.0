@@ -11,34 +11,39 @@ class TelaHome extends StatefulWidget {
 
 class EstadoTelaHome extends State<TelaHome> {
   int isSelected = 0; // Esta variável controla a categoria selecionada
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              construirCategoriasDeProdutos(index: 0, nome: "Todos produtos"),
-              construirCategoriasDeProdutos(index: 1, nome: "Gamer"),
-              construirCategoriasDeProdutos(index: 2, nome: "Rede"),
-              construirCategoriasDeProdutos(index: 3, nome: "Harware"),
-            ],
-          ),
-          const SizedBox(
-              height: 80), // Espaçamento entre os botões e o conteúdo abaixo
+    return Container(
+      // Defina a cor de fundo aqui
+      color: Colors.blue, // Substitua pela cor desejada
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                construirCategoriasDeProdutos(index: 0, nome: "Todos produtos"),
+                construirCategoriasDeProdutos(index: 1, nome: "Gamer"),
+                construirCategoriasDeProdutos(index: 2, nome: "Rede"),
+                construirCategoriasDeProdutos(index: 3, nome: "Hardware"),
+              ],
+            ),
+            const SizedBox(
+                height: 80), // Espaçamento entre os botões e o conteúdo abaixo
 
-          Expanded(
-            child: isSelected == 0
-                ? construirTodosOsProdutos()
-                : isSelected == 1
-                    ? construirGamer()
-                    : isSelected == 2
-                        ? construirRede()
-                        : construirHardware(),
-          ),
-        ],
+            Expanded(
+              child: isSelected == 0
+                  ? construirTodosOsProdutos()
+                  : isSelected == 1
+                      ? construirGamer()
+                      : isSelected == 2
+                          ? construirRede()
+                          : construirHardware(),
+            ),
+          ],
+        ),
       ),
     );
   }
