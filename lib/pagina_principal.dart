@@ -88,6 +88,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
         selectedIndex: isSelected,
         favoritos: favoritos,
       ),
+      backgroundColor: Color.fromARGB(240, 223, 221, 221),
     );
   }
 
@@ -194,7 +195,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
 
   Widget construirCategoriasDeProdutos() {
     return Container(
-      color: Colors.white,
+      color: Color.fromARGB(240, 223, 221, 221),
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       width: double.infinity,
       child: SingleChildScrollView(
@@ -229,7 +230,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
           color: isSelected == index
               ? Colors.pink
               : Color.fromARGB(
-                  241, 255, 255, 255), // Use Colors.pink quando selecionado
+                  240, 223, 221, 221), // Use Colors.pink quando selecionado
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(

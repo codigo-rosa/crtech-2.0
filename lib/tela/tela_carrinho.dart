@@ -89,7 +89,7 @@ class TelaCarrinhoState extends State<TelaCarrinho> {
               color: Colors.black, // Define a cor do ícone como preto
             ),
             backgroundColor:
-                Color.fromARGB(255, 240, 238, 239), // Cor de fundo cinza
+                Color.fromARGB(240, 223, 221, 221), // Cor de fundo cinza
           ),
           SizedBox(height: 16), // Espaço entre os botões
           FloatingActionButton(
@@ -106,7 +106,7 @@ class TelaCarrinhoState extends State<TelaCarrinho> {
               color: Colors.black, // Cor do ícone (preto)
             ),
             backgroundColor:
-                Color.fromARGB(255, 240, 238, 239), // Cor de fundo cinza
+                Color.fromARGB(240, 223, 221, 221), // Cor de fundo cinza
           ),
         ],
       ),
