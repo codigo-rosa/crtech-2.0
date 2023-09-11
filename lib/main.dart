@@ -11,12 +11,13 @@ class Aplicativo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'CR Tech',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-        ),
-        home: TelaAbertura() // Defina sua página principal aqui
-        );
+      title: 'CR Tech',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+      ),
+      home: TelaAbertura(),
+      // Defina sua página principal aqui
+    );
   }
 }

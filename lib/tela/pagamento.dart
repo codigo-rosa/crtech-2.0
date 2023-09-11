@@ -22,155 +22,232 @@ class _TelaDePagamentoState extends State<TelaDePagamento> {
       TextEditingController();
   final TextEditingController _securityCodeController = TextEditingController();
 
+  TextStyle _defaultTextStyle({bool isBold = false}) {
+    return TextStyle(
+      fontSize: 18,
+      fontFamily: 'Arial',
+      fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+      color: Colors.black, // Cor do texto preto
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Pagamento'),
-        backgroundColor: Colors.pink,
+        backgroundColor: Colors.pink, // Cor de fundo rosa
       ),
-      body: Padding(
+      body: Container(
+        color: Color.fromARGB(239, 238, 237, 237), // Cor de fundo cinza
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  DropdownButton<String>(
-                    value: _selectedCardType,
-                    hint: Text('Selecione o tipo de cartão'),
-                    onChanged: (newValue) {
-                      setState(() {
-                        _selectedCardType = newValue ?? 'Visa';
-                      });
-                    },
-                    items: <String>['Visa', 'MasterCard', 'Amex', 'Outro']
-                        .map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
+            Text(
+              'Dados de pagamento',
+              style: _defaultTextStyle(isBold: true),
+            ),
+            SizedBox(height: 26),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Selecione o tipo de cartão',
+                  style: _defaultTextStyle(),
+                ),
+                DropdownButton<String>(
+                  value: _selectedCardType,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _selectedCardType = newValue ?? 'Visa';
+                    });
+                  },
+                  items: <String>['Visa', 'MasterCard', 'Amex', 'Outro']
+                      .map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value, style: _defaultTextStyle()),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(height: 16),
+                TextFormField(
+                  controller: _cardNumberController,
+                  decoration: InputDecoration(
+                    labelText: 'Número do Cartão',
+                    labelStyle: _defaultTextStyle(),
                   ),
-                  TextFormField(
-                    controller: _cardNumberController,
-                    decoration: InputDecoration(labelText: 'Número do Cartão'),
+                ),
+                SizedBox(height: 16),
+                TextFormField(
+                  controller: _expirationDateController,
+                  decoration: InputDecoration(
+                    labelText: 'Data de Expiração',
+                    labelStyle: _defaultTextStyle(),
                   ),
-                  TextFormField(
-                    controller: _expirationDateController,
-                    decoration: InputDecoration(labelText: 'Data de Expiração'),
+                ),
+                SizedBox(height: 16),
+                TextFormField(
+                  controller: _securityCodeController,
+                  decoration: InputDecoration(
+                    labelText: 'Código de Segurança',
+                    labelStyle: _defaultTextStyle(),
                   ),
-                  TextFormField(
-                    controller: _securityCodeController,
-                    decoration:
-                        InputDecoration(labelText: 'Código de Segurança'),
-                  ),
-                  DropdownButton<int>(
-                    value: _selectedInstallments,
-                    hint: Text('Selecione o número de parcelas'),
-                    onChanged: (newValue) {
-                      setState(() {
-                        _selectedInstallments = newValue ?? 1;
-                      });
-                    },
-                    items: List.generate(12, (index) => index + 1)
-                        .map((int value) {
-                      return DropdownMenuItem<int>(
-                        value: value,
-                        child: Text('$value Parcelas'),
-                      );
-                    }).toList(),
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    'Valor Total: R\$ ${widget.valorTotal.toStringAsFixed(2)}',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  Text(
-                    'Valor Parcelado em $_selectedInstallments parcela(s) de R\$ ${(widget.valorTotal / _selectedInstallments).toStringAsFixed(2)}',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_validarCampos()) {
-                        double valorParcela =
-                            widget.valorTotal / _selectedInstallments;
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Selecione o número de parcelas',
+                  style: _defaultTextStyle(),
+                ),
+                DropdownButton<int>(
+                  value: _selectedInstallments,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _selectedInstallments = newValue ?? 1;
+                    });
+                  },
+                  items:
+                      List.generate(12, (index) => index + 1).map((int value) {
+                    return DropdownMenuItem<int>(
+                      value: value,
+                      child:
+                          Text('$value Parcelas', style: _defaultTextStyle()),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(height: 200),
+                Text(
+                  'Valor Total: R\$ ${widget.valorTotal.toStringAsFixed(2)}',
+                  style: _defaultTextStyle(),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Parcelado em $_selectedInstallments parcela(s) de R\$ ${(widget.valorTotal / _selectedInstallments).toStringAsFixed(2)}',
+                  style: _defaultTextStyle(),
+                ),
+                SizedBox(height: 16),
+              ],
+            ),
+            SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerRight,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_validarCampos()) {
+                    double valorParcela =
+                        widget.valorTotal / _selectedInstallments;
 
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text('Detalhes do Pagamento'),
-                              content: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text('Tipo de Cartão: $_selectedCardType'),
-                                  Text(
-                                      'Número do Cartão: ${_cardNumberController.text}'),
-                                  Text(
-                                      'Data de Expiração: ${_expirationDateController.text}'),
-                                  Text(
-                                      'Código de Segurança: ${_securityCodeController.text}'),
-                                  Text(
-                                      'Número de Parcelas: $_selectedInstallments'),
-                                  Text(
-                                      'Valor Total: R\$ ${widget.valorTotal.toStringAsFixed(2)}'),
-                                  Text(
-                                      'Valor de Cada Parcela: R\$ ${valorParcela.toStringAsFixed(2)}'),
-                                ],
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text(
+                            'Detalhes do Pagamento',
+                            style: _defaultTextStyle(isBold: true),
+                          ),
+                          content: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Tipo de Cartão: $_selectedCardType',
+                                style: _defaultTextStyle(),
                               ),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    // Navegar para a página de seleção de formas de entrega
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            TelaSelecaoEntrega(),
-                                      ),
-                                    );
-                                  },
-                                  child: Text('OK'),
+                              Text(
+                                'Número do Cartão: ${_cardNumberController.text}',
+                                style: _defaultTextStyle(),
+                              ),
+                              Text(
+                                'Data de Expiração: ${_expirationDateController.text}',
+                                style: _defaultTextStyle(),
+                              ),
+                              Text(
+                                'Código de Segurança: ${_securityCodeController.text}',
+                                style: _defaultTextStyle(),
+                              ),
+                              Text(
+                                'Número de Parcelas: $_selectedInstallments',
+                                style: _defaultTextStyle(),
+                              ),
+                              Text(
+                                'Valor Total: R\$ ${widget.valorTotal.toStringAsFixed(2)}',
+                                style: _defaultTextStyle(),
+                              ),
+                              Text(
+                                'Valor de Cada Parcela: R\$ ${valorParcela.toStringAsFixed(2)}',
+                                style: _defaultTextStyle(),
+                              ),
+                            ],
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TelaSelecaoEntrega(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'OK',
+                                style: TextStyle(
+                                  color: Colors.pink, // Cor do botão rosa
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Arial',
                                 ),
-                              ],
-                            );
-                          },
+                              ),
+                            ),
+                          ],
                         );
-                      } else {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text('Campos obrigatórios'),
-                              content:
-                                  Text('Por favor, preencha todos os campos.'),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
+                      },
+                    );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text(
+                            'Campos obrigatórios',
+                            style: _defaultTextStyle(isBold: true),
+                          ),
+                          content: Text(
+                            'Por favor, preencha todos os campos.',
+                            style: _defaultTextStyle(),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'OK',
+                                style: _defaultTextStyle(),
+                              ),
+                            ),
+                          ],
                         );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(
-                          255, 240, 238, 239), // Cor de fundo cinza
-                      onPrimary: Colors.black, // Cor do texto preto
-                    ),
-                    child: Text('Pagar'),
+                      },
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  primary:
+                      Color.fromARGB(240, 223, 221, 221), // Cor de fundo cinza
+                  minimumSize: Size(200, 60), // Tamanho do botão
+                ),
+                child: Text(
+                  'Finalizar Compra',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Arial',
+                    color: Colors.black, // Cor do texto preto
                   ),
-                ],
+                ),
               ),
             ),
           ],

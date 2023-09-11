@@ -21,13 +21,14 @@ class TelaCarrinhoState extends State<TelaCarrinho> {
         title: const Text('Carrinho de Compras'),
         backgroundColor: Colors.pink,
       ),
+      backgroundColor: Color.fromARGB(239, 238, 237, 237),
       body: widget.carrinho.isEmpty
           ? Center(
               child: Text(
                 'Seu carrinho está vazio!',
                 style: TextStyle(
                   fontSize: 24,
-                  color: Theme.of(context).primaryColor,
+                  color: Colors.black,
                   fontWeight: FontWeight.w100,
                 ),
                 textAlign: TextAlign.center,
@@ -37,29 +38,41 @@ class TelaCarrinhoState extends State<TelaCarrinho> {
               itemCount: widget.carrinho.length,
               itemBuilder: (context, index) {
                 final produto = widget.carrinho[index];
-                return ListTile(
-                  leading: Image.asset(produto.imagem),
-                  title: Text(produto.nome),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Preço: R\$ ${produto.preco}'),
-                      Text('Descrição: ${produto.descricao}'),
-                      Text('Quantidade: ${produto.quantidade}'),
-                    ],
+                return Container(
+                  padding:
+                      EdgeInsets.all(8), // Espaçamento interno do contêiner
+                  margin: EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 16), // Espaçamento externo do contêiner
+                  decoration: BoxDecoration(
+                    color: Colors.white, // Cor de fundo do contêiner
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () {
-                          setState(() {
-                            widget.carrinho.removeAt(index);
-                          });
-                        },
-                      ),
-                    ],
+                  child: ListTile(
+                    leading: Image.asset(produto.imagem),
+                    title: Text(produto.nome),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Preço: R\$ ${produto.preco}'),
+                        Text('Descrição: ${produto.descricao}'),
+                        Text('Quantidade: ${produto.quantidade}'),
+                      ],
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () {
+                            setState(() {
+                              widget.carrinho.removeAt(index);
+                            });
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
@@ -89,8 +102,9 @@ class TelaCarrinhoState extends State<TelaCarrinho> {
               color: Colors.black, // Define a cor do ícone como preto
             ),
             backgroundColor:
-                Color.fromARGB(240, 223, 221, 221), // Cor de fundo cinza
+                Color.fromARGB(241, 255, 255, 255), // Cor de fundo cinza
           ),
+
           SizedBox(height: 16), // Espaço entre os botões
           FloatingActionButton(
             onPressed: () {
@@ -106,7 +120,7 @@ class TelaCarrinhoState extends State<TelaCarrinho> {
               color: Colors.black, // Cor do ícone (preto)
             ),
             backgroundColor:
-                Color.fromARGB(240, 223, 221, 221), // Cor de fundo cinza
+                Color.fromARGB(241, 255, 255, 255), // Cor de fundo cinza
           ),
         ],
       ),

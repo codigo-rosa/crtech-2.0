@@ -48,7 +48,7 @@ class CustomBottomAppBar extends StatelessWidget {
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
       notchMargin: 8.0,
-      color: Color.fromARGB(240, 223, 221, 221),
+      color: Color.fromARGB(239, 238, 237, 237),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
