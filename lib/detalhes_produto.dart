@@ -45,7 +45,7 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.withOpacity(0.1),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(241, 255, 255, 255),
         elevation: 0,
@@ -120,7 +120,7 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                 ),
               ),
             ),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 35.0),
             Text(
               'Sugestões de Produtos',
               style: TextStyle(fontSize: 18),
@@ -160,7 +160,7 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                 },
               ),
             ),
-            const SizedBox(height: 7.0),
+            const SizedBox(height: 35.0),
             Container(
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
