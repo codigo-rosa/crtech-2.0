@@ -2,21 +2,21 @@ import 'package:crtech/main.dart';
 import 'package:flutter/material.dart';
 import 'package:crtech/tela/carrrossel.dart';
 
-class TelaPerfil extends StatelessWidget {
-// Declaração dos controladores para os campos de texto
+class TelaPerfil extends StatefulWidget {
+  @override
+  _TelaPerfilState createState() => _TelaPerfilState();
+}
+
+class _TelaPerfilState extends State<TelaPerfil> {
+  // Declaração dos controladores para os campos de texto
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController senhaController = TextEditingController();
 
-  TelaPerfil({super.key});
+  bool _showPassword = false;
 
   @override
   Widget build(BuildContext context) {
-    // Navega para a tela Carrossel automaticamente quando a tela for construída
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => Carrossel()),
-    // );
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pink,
@@ -43,15 +43,20 @@ class TelaPerfil extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CircleAvatar(
-                    radius: 55,
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: AssetImage('logo/perfil.png'),
+                  Container(
+                    width: 200,
+                    height: 200,
+                    child: Image.asset('logo/logo.jpg'),
                   ),
-
-                  const SizedBox(
-                      height: 40), // Espaço entre a imagem e as barras
-                  // Campo de texto para o nome do usuário
+                  const SizedBox(height: 40),
+                  Text(
+                    'Fique por dentro das novidades e promoções!',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                   TextFormField(
                     controller: nomeController,
                     decoration: const InputDecoration(
@@ -59,8 +64,7 @@ class TelaPerfil extends StatelessWidget {
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  const SizedBox(height: 20), // Espaço entre os campos
-                  // Campo de texto para o e-mail
+                  const SizedBox(height: 20),
                   TextFormField(
                     controller: emailController,
                     decoration: const InputDecoration(
@@ -68,10 +72,61 @@ class TelaPerfil extends StatelessWidget {
                       border: OutlineInputBorder(),
                     ),
                   ),
-
-                  const SizedBox(
-                      height: 40), // Espaço entre os campos e o botão
-                  // Botão "Entrar"
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: senhaController,
+                    obscureText: !_showPassword,
+                    decoration: InputDecoration(
+                      labelText: 'Senha',
+                      border: OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          _showPassword = !_showPassword;
+                          // Redesenha o widget para atualizar o campo de senha
+                          setState(() {});
+                        },
+                        icon: Icon(
+                          _showPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {
+                      // Lógica para redefinir a senha
+                      // Você pode adicionar a lógica de redefinição de senha aqui
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text('Esqueceu sua senha?'),
+                            content: Text(
+                              'Enviamos um email com instruções para redefinir sua senha.',
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: Text(
+                      'Esqueceu sua senha?',
+                      style: TextStyle(
+                        fontSize: 16,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
                   ElevatedButton(
                     onPressed: () {
                       // Obtém os valores dos campos
@@ -84,6 +139,7 @@ class TelaPerfil extends StatelessWidget {
                       // Limpa os campos
                       nomeController.clear();
                       emailController.clear();
+                      senhaController.clear();
 
                       // Navega para a página principal
                       Navigator.push(
@@ -93,17 +149,48 @@ class TelaPerfil extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 13, 13, 13),
+                      primary: Color.fromARGB(
+                          255, 240, 238, 239), // Cor de fundo cinza
+                      onPrimary: Colors.black, // Cor do texto preto
                     ),
                     child: const Text(
-                      'Entrar',
+                      'Iniciar Sessão',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                   ),
                 ],
               ),
+            ),
+          ),
+          Positioned(
+            bottom: 16,
+            right: 16,
+            child: FloatingActionButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('COMUNICADO'),
+                      content: Text(
+                        'Nosso atendimento via WhatsApp está temporariamente fora do ar.',
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              backgroundColor: Colors.green,
+              child: Icon(Icons.phone),
             ),
           ),
         ],

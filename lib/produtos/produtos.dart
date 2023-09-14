@@ -4,7 +4,7 @@ class Produtos {
   final String imagem;
   final String descricao;
   final double preco;
-  final double quantidade;
+  int quantidade;
 
   Produtos({
     required this.id,
