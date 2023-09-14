@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:crtech/produtos/produtos.dart';
-import 'package:crtech/barra_inferior.dart';
-import 'package:provider/provider.dart';
-import 'package:crtech/favoritos_provider.dart';
 
 class TelaFavoritos extends StatefulWidget {
   final List<Produtos> favoritos;
