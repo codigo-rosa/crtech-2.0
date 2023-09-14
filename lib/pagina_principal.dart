@@ -73,6 +73,38 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Ícone de coração para favoritar
+              IconButton(
+                iconSize: 18.5, // Tamanho do ícone
+                icon: Icon(
+                  favoritos[index] ? Icons.favorite : Icons.favorite_border,
+                  color: Color.fromARGB(255, 231, 130, 164),
+                ),
+                onPressed: () {
+                  setState(() {
+                    favoritos[index] = !favoritos[index];
+                  });
+                },
+              ),
+              // Ícone de carrinho para adicionar ao carrinho
+              IconButton(
+                iconSize: 18.5, // Tamanho do ícone
+                icon: const Icon(
+                  Icons.add_shopping_cart_sharp,
+                  color: Colors.black, // Cor do ícone de carrinho
+                ),
+                onPressed: () {
+                  setState(() {
+                    carrinho.add(produtos);
+                  });
+                  mostrarModalConfirmacao(context);
+                },
+              ),
+            ],
+          ),
           Expanded(
             child: GestureDetector(
               onTap: () {
@@ -91,59 +123,44 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
               ),
             ),
           ),
-          Text(
-            produtos.descricao,
-            style: const TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 13,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 5),
-          Text(
-            'R\$ ${NumberFormat.currency(locale: 'pt_BR', symbol: '').format(produtos.preco)}',
-            style: const TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 13,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                carrinho.add(produtos);
-              });
-              mostrarModalConfirmacao(context);
-            },
-            style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 240, 238, 239),
-              onPrimary: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              produtos.descricao,
+              style: const TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
               ),
-            ),
-            child: const Text(
-              'Adicionar ao Carrinho',
-              style: TextStyle(
-                fontSize: 12.0,
-                fontWeight: FontWeight.bold,
-              ),
+              textAlign: TextAlign.center,
             ),
           ),
-          // Ícone de coração para favoritar
-          IconButton(
-            icon: Icon(
-              favoritos[index] ? Icons.favorite : Icons.favorite_border,
-              color: Colors.red, // Cor do ícone de coração
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Column(
+              children: [
+                Text(
+                  'R\$ ${NumberFormat.currency(locale: 'pt_BR', symbol: '').format(produtos.preco)}',
+                  style: const TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: 15,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w800,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 3),
+                const Text(
+                  'À vista ou em até 10x no cartão',
+                  style: TextStyle(
+                    fontFamily: 'roboto',
+                    fontSize: 11,
+                    color: Color.fromARGB(255, 102, 102, 102),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-            onPressed: () {
-              setState(() {
-                favoritos[index] = !favoritos[index];
-              });
-            },
           ),
         ],
       ),
@@ -244,7 +261,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
         maxCrossAxisExtent: 200,
         mainAxisSpacing: 20,
         crossAxisSpacing: 20,
-        childAspectRatio: 3 / 3,
+        childAspectRatio: 0.75,
       ),
       itemCount: produtosExibidos.length,
       itemBuilder: (context, index) {
