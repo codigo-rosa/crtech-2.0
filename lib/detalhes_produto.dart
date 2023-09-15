@@ -22,7 +22,7 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
   ScrollController _scrollController = ScrollController();
   double _scrollPosition = 0.0;
   double _scrollMax = 0.0;
-  double _scrollIncrement = 1.0;
+  double _scrollIncrement = 5.0;
 
   @override
   void initState() {
@@ -256,7 +256,15 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                                   mostrarModalEnviado(
                                       context); //Chama o método para enviar o comentário
                                 },
-                                child: const Text('Enviar Avaliação'),
+                                child: const Text(
+                                  'Enviar Avaliação',
+                                  style: TextStyle(
+                                    color: Colors.white, // Cor do texto
+                                  ),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.pink, // Cor do botão
+                                ),
                               ),
                             ],
                           ),
@@ -275,13 +283,21 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: const Text('Avaliação enviado com sucesso!'),
+          content: const Text('Avaliação enviada com sucesso!'),
           actions: <Widget>[
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('OK'),
+              child: const Text(
+                'OK',
+                style: TextStyle(
+                  color: Colors.white, // Cor do texto
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.pink, // Cor do botão
+              ),
             ),
           ],
         );
