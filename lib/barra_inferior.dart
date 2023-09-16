@@ -1,11 +1,13 @@
 import 'package:crtech/avaliacao_cliente.dart';
+import 'package:crtech/produtos/produtos.dart';
 import 'package:crtech/tela/tela_perfil.dart';
+import 'package:crtech/tela/tela_favoritos.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
   final Function(int) onTabSelected;
   final int selectedIndex;
-  final List<bool> favoritos;
+  final List<Produtos> favoritos;
 
   CustomBottomAppBar({
     required this.onTabSelected,
@@ -16,11 +18,11 @@ class CustomBottomAppBar extends StatelessWidget {
   // Método para abrir a página de favoritos
   void _openFavoritesPage(BuildContext context) {
     Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => FavoritosPage(favoritos: favoritos),
-      ),
-    );
+        context,
+        MaterialPageRoute(
+          builder: (context) => TelaFavoritos(favoritos: favoritos),
+        ),
+        );
   }
 
 // Método para abrir a página de perfil
@@ -74,35 +76,4 @@ class CustomBottomAppBar extends StatelessWidget {
   }
 }
 
-class FavoritosPage extends StatelessWidget {
-  final List<bool> favoritos;
 
-  FavoritosPage({required this.favoritos});
-
-  @override
-  Widget build(BuildContext context) {
-    // Aqui você pode criar a interface para exibir a lista de favoritos
-    // usando a lista favoritos passada como parâmetro.
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Produtos Favoritos'),
-        backgroundColor: Colors.pink,
-      ),
-      body: ListView.builder(
-        itemCount: favoritos.length,
-        itemBuilder: (context, index) {
-          // Construa cada item da lista de favoritos aqui
-          // Use favoritos[index] para determinar se o item é um favorito.
-          // Exiba os produtos favoritos de acordo com a lógica do seu aplicativo.
-          return ListTile(
-            title: Text('Produto ${index + 1}'),
-            // Exiba um ícone de coração preenchido se for favorito, caso contrário, vazio.
-            leading:
-                Icon(favoritos[index] ? Icons.favorite : Icons.favorite_border),
-          );
-        },
-      ),
-    );
-  }
-}

@@ -5,6 +5,9 @@ import 'package:crtech/produtos/meus_produtos.dart';
 import 'package:crtech/produtos/produtos.dart';
 import 'package:crtech/tela/carrrossel.dart';
 import 'package:crtech/tela/tela_carrinho.dart';
+import 'package:crtech/tela/tela_favoritos.dart';
+import 'package:crtech/favoritos_provider.dart';
+=======
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -20,9 +23,9 @@ class PaginaPrincipal extends StatefulWidget {
 
 class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
   int isSelected = 0;
-  List<bool> favoritos = List.filled(MeusProdutos.todosProdutos.length, false);
   String searchText = "";
   List<Produtos> listaDeProdutos = MeusProdutos.todosProdutos;
+  List<Produtos> favoritos = [];
   List<Produtos> carrinho = [];
 
   @override
@@ -106,12 +109,22 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
               IconButton(
                 iconSize: 18.5, // Tamanho do ícone
                 icon: Icon(
-                  favoritos[index] ? Icons.favorite : Icons.favorite_border,
+
+                  favoritos.contains(produtos) ? Icons.favorite : Icons.favorite_border,
+=======
+
                   color: Color.fromARGB(255, 231, 130, 164),
                 ),
                 onPressed: () {
                   setState(() {
-                    favoritos[index] = !favoritos[index];
+
+                    if (favoritos.contains(produtos)) {
+                      favoritos.remove(produtos);
+                    } else {
+                      favoritos.add(produtos);
+                    }
+=======
+
                   });
                 },
               ),
@@ -257,22 +270,16 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
   Widget construirProdutosExibidos() {
     List<Produtos> produtosExibidos;
 
-    produtosExibidos = listaDeProdutos.where((produto) {
-      return produto.descricao.toLowerCase().contains(searchText.toLowerCase());
-    }).toList();
-
-    if (isSelected == 1) {
-      produtosExibidos = produtosExibidos.where((produto) {
-        return MeusProdutos.listaGamer.contains(produto);
-      }).toList();
+    if (isSelected == 0) {
+      produtosExibidos = MeusProdutos.todosProdutos;
+    } else if (isSelected == 1) {
+      produtosExibidos = MeusProdutos.listaGamer;
     } else if (isSelected == 2) {
-      produtosExibidos = produtosExibidos.where((produto) {
-        return MeusProdutos.listaDeRede.contains(produto);
-      }).toList();
+      produtosExibidos = MeusProdutos.listaDeRede;
     } else if (isSelected == 3) {
-      produtosExibidos = produtosExibidos.where((produto) {
-        return MeusProdutos.listaDeHardware.contains(produto);
-      }).toList();
+      produtosExibidos = MeusProdutos.listaDeHardware;
+    } else {
+      produtosExibidos = [];
     }
 
     return GridView.builder(
@@ -290,3 +297,4 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
     );
   }
 }
+
