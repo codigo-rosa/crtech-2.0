@@ -59,13 +59,13 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 
 # ✒️ Autoras
-* [Heloise Cardoso](https://github.com/HeloiseCardoso)
 * [Letycia](https://github.com/letyciaEst08)
 * [Giselly Rock](https://github.com/gisellyrock)
 * [Eveline Teles](https://github.com/evelineteles)
 * [Amanda Fernandes](https://github.com/AmandaBFernandes)
 * [Lira Gabriela](https://github.com/zliragabriella)
 * [Vitoria Dumont](https://github.com/vitoriadumont)
+* [Heloise Cardoso](https://github.com/HeloiseCardoso)
 
 ## 🎁 Expressões de gratidão
 * Agradecemos a ÍmaTech pelo aprendizado;
