@@ -7,6 +7,7 @@ import 'package:crtech/tela/carrrossel.dart';
 import 'package:crtech/tela/tela_carrinho.dart';
 import 'package:crtech/tela/tela_favoritos.dart';
 import 'package:crtech/favoritos_provider.dart';
+=======
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -108,16 +109,22 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
               IconButton(
                 iconSize: 18.5, // Tamanho do ícone
                 icon: Icon(
+
                   favoritos.contains(produtos) ? Icons.favorite : Icons.favorite_border,
+=======
+
                   color: Color.fromARGB(255, 231, 130, 164),
                 ),
                 onPressed: () {
                   setState(() {
+
                     if (favoritos.contains(produtos)) {
                       favoritos.remove(produtos);
                     } else {
                       favoritos.add(produtos);
                     }
+=======
+
                   });
                 },
               ),
@@ -285,7 +292,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
       itemCount: produtosExibidos.length,
       itemBuilder: (context, index) {
         final produtos = produtosExibidos[index];
-        return construirCardDeProdutos(produtos, index, produtos.id);
+        return construirCardDeProdutos(produtos, index, produtos.categoria);
       },
     );
   }
