@@ -23,7 +23,7 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
   double _scrollPosition = 0.0;
   double _scrollMax = 0.0;
 
-=======
+
   double _scrollIncrement = 5.0;
 
 
@@ -263,7 +263,7 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                                       context); //Chama o método para enviar o comentário
                                 },
                               
-=======
+
                                 child: const Text(
                                   'Enviar Avaliação',
                                   style: TextStyle(

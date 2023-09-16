@@ -1,5 +1,5 @@
 class Produtos {
-  final int categoria;
+  final int id;
   final String nome;
   final String imagem;
   final String descricao;
@@ -7,7 +7,7 @@ class Produtos {
   int quantidade;
 
   Produtos({
-    required this.categoria,
+    required this.id,
     required this.nome,
     required this.preco,
     required this.descricao,

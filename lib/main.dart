@@ -15,7 +15,7 @@ class Aplicativo extends StatelessWidget {
       ChangeNotifierProvider(create: (context) => FavoritosProvider()), // Crie uma instância do FavoritosProvider
     ],
     child: MaterialApp(
-=======
+
       title: 'CR Tech',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -26,5 +26,5 @@ class Aplicativo extends StatelessWidget {
       // Defina sua página principal aqui
     ),
   );
-=======
+
 }
