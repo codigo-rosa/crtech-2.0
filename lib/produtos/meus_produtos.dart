@@ -6,6 +6,7 @@ class MeusProdutos {
     ...MeusProdutos.listaDeHardware,
     ...MeusProdutos.listaDeRede,
   ];
+
   static List<Produtos> listaGamer = [
     Produtos(
       id: 1,
@@ -16,7 +17,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 2,
       nome: 'Controle com fio gamer',
       preco: 287.00,
       imagem: 'assets/gamer/controlecomfio1.jpg',
@@ -24,7 +26,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 3,
       nome: 'Controle com fio gamer',
       preco: 164.00,
       imagem: 'assets/gamer/controlecomfio2.jpg',
@@ -32,7 +35,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 4,
       nome: 'Mouse para gamer',
       preco: 23.00,
       imagem: 'assets/gamer/mousegamer.jpg',
@@ -40,7 +44,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 5,
       nome: 'Mouse para gamer',
       preco: 32.00,
       imagem: 'assets/gamer/mousegamer1.jpg',
@@ -48,7 +53,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 6,
       nome: 'Mouse para gamer',
       preco: 22.00,
       imagem: 'assets/gamer/mousegamer2.jpg',
@@ -56,7 +62,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 7,
       nome: 'Mouse Pad',
       preco: 23.00,
       imagem: 'assets/gamer/mousepadgamer.jpg',
@@ -64,7 +71,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 8,
       nome: 'Mouse Pad',
       preco: 32.00,
       imagem: 'assets/gamer/mousepadgamer1.jpg',
@@ -72,7 +80,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 9,
       nome: 'Mouse Pad',
       preco: 22.40,
       imagem: 'assets/gamer/mousepadgamer2.jpg',
@@ -80,7 +89,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 10,
       nome: 'Kit teclado e mouse gamer',
       preco: 68.00,
       imagem: 'assets/gamer/kit.jpg',
@@ -88,7 +98,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 11,
       nome: 'Kit teclado e mouse gamer',
       preco: 175.00,
       imagem: 'assets/gamer/kit1.jpg',
@@ -96,7 +107,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 12,
       nome: 'Kit teclado e mouse gamer',
       preco: 148.00,
       imagem: 'assets/gamer/kit2.jpg',
@@ -104,7 +116,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 13,
       nome: 'Headphone gamer',
       preco: 75.00,
       imagem: 'assets/gamer/fonedeouvidogamer.jpg',
@@ -112,7 +125,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 14,
       nome: 'Headphone gamer',
       preco: 107.00,
       imagem: 'assets/gamer/fonedeouvidogamer1.jpg',
@@ -120,7 +134,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 15,
       nome: 'Headphone gamer',
       preco: 114.00,
       imagem: 'assets/gamer/fonedeouvidogamer2.jpg',
@@ -128,7 +143,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 16,
       nome: 'Led para Gamer',
       preco: 41.00,
       imagem: 'assets/gamer/ledparagamer.jpg',
@@ -136,7 +152,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 17,
       nome: 'Led para Gamer',
       preco: 74.90,
       imagem: 'assets/gamer/ledparagamer1.jpg',
@@ -144,7 +161,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 1,
+
+      id: 18,
       nome: 'Controle com fio gamer',
       preco: 355.00,
       imagem: 'assets/gamer/ledparagamer2.jpg',
@@ -155,11 +173,13 @@ class MeusProdutos {
 
   static List<Produtos> listaDeHardware = [
     Produtos(
-      id: 2,
+
+      id: 1,
       nome: "Placa Mãe Gigabyte B550M AORUS Elite",
       preco: 739.90,
       imagem: "assets/hardware/placa_mae02.jpg",
-      descricao: "Placa Mãe Gigabyte B550M AORUS Elite, Chipset B550",
+      descricao:
+          "Placa Mãe Gigabyte B550M AORUS Elite, Chipset B550, AMD AM4, mATX, DDR4",
       quantidade: 1,
     ),
     Produtos(
@@ -171,7 +191,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 3,
       nome: "Placa Mãe Asus",
       preco: 319.90,
       imagem: "assets/hardware/placa_mae.jpg",
@@ -179,7 +200,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 4,
       nome: "Cooler para Processador - Master Hyper, Black Edition",
       preco: 319.90,
       imagem: "assets/hardware/cooler_processador02.jpg",
@@ -188,15 +210,18 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 5,
       nome: "Cooler para Processador - Master Hyper",
       preco: 149.90,
       imagem: "assets/hardware/cooler_processador01.jpg",
-      descricao: "Cooler para Processador Cooler Master AMD/ Intel Hyper H412R",
+      descricao:
+          "Cooler para Processador Cooler Master AMD/ Intel Hyper H412R - RR-H412-20PK-R2",
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 6,
       nome: "SSD Externo Portátil Sandisk Extreme 2TB",
       preco: 939.90,
       imagem: "assets/hardware/ssd_externo02.png",
@@ -204,7 +229,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 7,
       nome: "SSD Externo Portátil Kingston, 2TB",
       preco: 1099.90,
       imagem: "assets/hardware/ssd_externo01.png",
@@ -212,7 +238,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 8,
       nome: "SSD Externo Portátil Sandisk Extreme 1TB",
       preco: 669.90,
       imagem: "assets/hardware/ssd_externo.png",
@@ -220,16 +247,18 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 9,
       nome: "Gabinete Gamer Mancer Narok",
       preco: 249.90,
       imagem: 'assets/hardware/gabinete_gamer.png',
       descricao:
-          "Gabinete Gamer Mancer Narok, Rainbow, Mid-Tower, Lateral de Vidro, Com 3 Fans.",
+          "Gabinete Gamer Mancer Narok, Rainbow, Mid-Tower, Lateral de Vidro, Com 3 Fans, Preto, MCR-NRK-RGB01",
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 10,
       nome: "Gabinete Gamer BPC-C3147",
       preco: 199.90,
       imagem: 'assets/hardware/gabinete_gamer01.jpg',
@@ -237,7 +266,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 11,
       nome: "Gabinete Gamer Pichau Pouter",
       preco: 349.90,
       imagem: 'assets/hardware/gabinete_gamer02.jpg',
@@ -246,15 +276,18 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 12,
       nome: "Placa de Vídeo Galax NVIDIA GeForce GTX 1660 Super",
       preco: 2449.90,
       imagem: 'assets/hardware/placa_video.png',
-      descricao: "Placa de Vídeo Galax NVIDIA GeForce GTX 1660 Super",
+      descricao:
+          "Placa de Vídeo Galax NVIDIA GeForce GTX 1660 Super, 6GB GDDR6, 192 Bits - 60SRL7DSY91S",
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 13,
       nome: "Placa de Vídeo Galax NVIDIA GeForce RTX 30 Series ",
       preco: 1529.90,
       imagem: "assets/hardware/placa_video01.png",
@@ -263,7 +296,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 14,
       nome: "Placa de Vídeo Quadro Nvidia T600",
       preco: 1789.00,
       imagem: "assets/hardware/placa_video02.png",
@@ -271,7 +305,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 15,
       nome: "Memória Desktop Crucial Basics",
       preco: 119.90,
       imagem: "assets/hardware/memoria_desktop.png",
@@ -280,7 +315,7 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+      id: 16,
       nome: "Memória Desktop Kingston Fury Beast",
       preco: 289.90,
       imagem: "assets/hardware/memoria_desktop01.png",
@@ -289,7 +324,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 2,
+
+      id: 17,
       nome: "Memória Desktop Oxy Gamer",
       preco: 379.90,
       imagem: "assets/hardware/memoria_desktop02.png",
@@ -300,7 +336,8 @@ class MeusProdutos {
   ];
   static List<Produtos> listaDeRede = [
     Produtos(
-      id: 3,
+
+      id: 1,
       nome: 'Roteador Mikrotik Hex',
       preco: 439.00,
       imagem: 'assets/network/mikrotik.jpeg',
@@ -308,7 +345,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 3,
+
+      id: 2,
       nome: 'Roteador Mikrotik Routerboard',
       preco: 696.00,
       imagem: 'assets/network/mikrotik01.jpeg',
@@ -324,7 +362,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 3,
+
+      id: 4,
       nome: 'Adaptador Wireless Syang Mini',
       preco: 24.90,
       imagem: 'assets/network/mini.jpeg',
@@ -332,7 +371,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 3,
+
+      id: 5,
       nome: 'Adaptador Wireless TP-Link Dual-Band',
       preco: 149.50,
       imagem: 'assets/network/mini01.jpeg',
@@ -340,7 +380,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 3,
+
+      id: 6,
       nome: 'Adaptador Wireless TP-Link 300MBPS',
       preco: 68.90,
       imagem: 'assets/network/mini02.jpeg',
@@ -348,7 +389,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 3,
+
+      id: 7,
       nome: 'D-Link Repetidor Wireless',
       preco: 149.80,
       imagem: 'assets/network/repetidor.jpeg',
@@ -356,7 +398,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 3,
+
+      id: 8,
       nome: 'Repetidor Wireless Homesen 300M',
       preco: 62.00,
       imagem: 'assets/network/repetidor01.jpeg',
@@ -364,7 +407,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 3,
+
+      id: 9,
       nome: 'Repetidor Wireless TP-Link 300Mbps',
       preco: 123.40,
       imagem: 'assets/network/repetidor02.jpeg',
@@ -372,7 +416,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 3,
+
+      id: 10,
       nome: 'Switch TP-Link 8 Portas',
       preco: 360.30,
       imagem: 'assets/network/switch.jpeg',
@@ -380,7 +425,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 3,
+
+      id: 11,
       nome: 'Switch TP-Link 5 Portas',
       preco: 85.40,
       imagem: 'assets/network/switch01.jpeg',
@@ -388,7 +434,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 3,
+
+      id: 12,
       nome: 'Switch TP-Link 8 Portas',
       preco: 768.90,
       imagem: 'assets/network/switch02.jpeg',
@@ -396,7 +443,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 3,
+
+      id: 13,
       nome: 'Expansor HUB USB',
       preco: 28.00,
       imagem: 'assets/network/usb.jpeg',
@@ -404,7 +452,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 3,
+
+      id: 14,
       nome: 'Expansor HUB USB 7 Portas',
       preco: 29.90,
       imagem: 'assets/network/usb01.jpeg',
@@ -412,7 +461,8 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 3,
+
+      id: 15,
       nome: 'Expansor HUB USB 4 Portas',
       preco: 55.30,
       imagem: 'assets/network/usb02.jpeg',

@@ -1,5 +1,6 @@
 import 'produtos.dart';
 import 'package:flutter/material.dart';
+import 'package:crtech/favoritos_provider.dart';
 import 'package:intl/intl.dart'; // Importando o pacote intl para formatação de números como moeda
 
 class ProdutoCard extends StatefulWidget {
@@ -15,6 +16,7 @@ class EstadoDoProdutoCard extends State<ProdutoCard> {
   final NumberFormat priceFormatter = NumberFormat.currency(
       locale: 'pt_BR',
       symbol: 'R\$'); // Criando um formato de número para formatação da moeda
+  late FavoritosProvider provider;
 
   @override
   Widget build(BuildContext context) {

@@ -47,7 +47,7 @@ class _AvaliacaoClientePageState extends State<AvaliacaoClientePage> {
             ),
             SizedBox(height: 20.0),
             TextField(
-              maxLines: 4,
+              maxLines: 8,
               decoration: InputDecoration(
                 hintText: 'Digite seu comentário...',
                 border: OutlineInputBorder(),
@@ -68,7 +68,15 @@ class _AvaliacaoClientePageState extends State<AvaliacaoClientePage> {
                 // Enviar os dados para o servidor ou fazer outra ação
                 enviarAvaliacao(avaliacao, comentario);
               },
-              child: Text('Enviar Avaliação'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.pink),
+              ),
+              child: Text(
+                'Enviar Avaliação',
+                style: TextStyle(
+                  color: Colors.black, // Cor do texto
+                ),
+              ),
             ),
           ],
         ),
