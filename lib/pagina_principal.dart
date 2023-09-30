@@ -109,18 +109,14 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                 iconSize: 18.5, // Tamanho do ícone
                 icon: Icon(
 
-                  favoritos.contains(produtos) ? Icons.favorite : Icons.favorite_border,
+                  favoritos[index] ? Icons.favorite : Icons.favorite_border,
 
                   color: Color.fromARGB(255, 231, 130, 164),
                 ),
                 onPressed: () {
                   setState(() {
 
-                    if (favoritos.contains(produtos)) {
-                      favoritos.remove(produtos);
-                    } else {
-                      favoritos.add(produtos);
-                    }
+                    favoritos[index] = !favoritos[index];
 
                   });
                 },
@@ -128,7 +124,9 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
               // Ícone de carrinho para adicionar ao carrinho
               IconButton(
                 iconSize: 18.5, // Tamanho do ícone
-                icon: Icon(
+
+                icon: const Icon(
+
                   Icons.add_shopping_cart_sharp,
                   color: Colors.black, // Cor do ícone de carrinho
                 ),
@@ -158,27 +156,46 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
               ),
             ),
           ),
-          Text(
-            produtos.descricao,
-            style: TextStyle(
-              fontFamily: GoogleFonts.lato()
-                  .fontFamily, // Use a fonte Lato do Google Fonts
-              fontSize: 13,
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              produtos.descricao,
+              style: const TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 5),
-          Text(
-            'R\$ ${NumberFormat.currency(locale: 'pt_BR', symbol: '').format(produtos.preco)}',
-            style: const TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 13,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Column(
+              children: [
+                Text(
+                  'R\$ ${NumberFormat.currency(locale: 'pt_BR', symbol: '').format(produtos.preco)}',
+                  style: const TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: 15,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w800,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 3),
+                const Text(
+                  'À vista ou em até 10x no cartão',
+                  style: TextStyle(
+                    fontFamily: 'roboto',
+                    fontSize: 11,
+                    color: Color.fromARGB(255, 102, 102, 102),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-            textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 10),
         ],
       ),
     );
@@ -284,7 +301,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
         maxCrossAxisExtent: 200,
         mainAxisSpacing: 20,
         crossAxisSpacing: 20,
-        childAspectRatio: 3 / 3,
+        childAspectRatio: 0.75,
       ),
       itemCount: produtosExibidos.length,
       itemBuilder: (context, index) {
